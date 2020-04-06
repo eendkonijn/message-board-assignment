@@ -1,0 +1,29 @@
+{
+  "name": "message-board",
+  "version": "1.0.0",
+  "description": "A tutorial covering React, Webpack, Babel, and other techniques. https://r-nitschelm.gitbook.io/assignment/getting-started/task",
+  "main": "index.js",
+  "author": "Rene van der Stok",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "2.0.3"
+  }
+}

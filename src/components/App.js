@@ -1,7 +1,8 @@
 import React from "react";
+import Home from "./Home";
 
 function App() {
-  return <div>Message Board: you have 0 new messages </div>;
+  return <Home />;
 }
 
 export default App;

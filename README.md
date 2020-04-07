@@ -1,0 +1,1 @@
+<!-- Misschien hier nog wat informatie toevoegen over hoe de app gestart wordt? -->

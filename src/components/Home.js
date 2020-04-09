@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Table from "react-bootstrap/Table";
+import { formatDate } from "./utils";
 
 const Home = () => {
   const [messages, setMessages] = useState([]);
@@ -13,18 +14,6 @@ const Home = () => {
         console.error("Error:", error);
       });
   }, []);
-
-  const formatDate = (date) => {
-    const dateToFormat = new Date(date);
-    const formattedDate =
-      dateToFormat.getDate() +
-      "-" +
-      (dateToFormat.getMonth() + 1) +
-      "-" +
-      dateToFormat.getFullYear();
-
-    return formattedDate;
-  };
 
   return (
     <>

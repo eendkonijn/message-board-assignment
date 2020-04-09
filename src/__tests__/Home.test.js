@@ -1,9 +1,9 @@
 import React from "react";
 import { render, cleanup, screen } from "@testing-library/react";
-import Home from "./Home";
-import { enableFetchMocks } from "jest-fetch-mock";
-
-enableFetchMocks();
+import Home from "../components/Home";
+import nock from "nock";
+import "@testing-library/jest-dom/extend-expect";
+// import fetch from "node-fetch";
 
 const messages = [
   {
@@ -26,18 +26,20 @@ const messages = [
   },
 ];
 
-beforeEach(() => {
-  fetch.resetMocks();
-  fetch.mockResponseOnce(JSON.stringify(messages));
-});
-
 afterEach(cleanup);
 
-it("renders without crashing", () => {
-  render(<Home />);
-});
+describe("Home", () => {
+  beforeEach(() => {
+    // fetch.resetMocks();
+    nock("http://localhost:3000")
+      .get("/messages?limit=50")
+      .reply(200, messages);
+  });
 
-it("renders a list", () => {
-  render(<Home />);
-  expect(screen.getByText("Saepe ut cupiditate.")).toBeTruthy;
+  it("renders a list", async () => {
+    render(<Home />);
+    await screen.findByText(/Saepe/);
+
+    expect(screen.getByText(/Saepe/)).toBeInTheDocument;
+  });
 });

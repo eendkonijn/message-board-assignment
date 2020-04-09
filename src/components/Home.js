@@ -1,14 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import { formatDate } from "./utils";
+import { formatDate } from "../utils/utils";
+import { getData } from "../api/api";
 
 const Home = () => {
   const [messages, setMessages] = useState([]);
   const limit = 50;
 
   useEffect(() => {
-    fetch("http://localhost:3000/messages?limit=" + limit)
-      .then((data) => data.json())
+    getData(limit)
       .then((data) => setMessages(data))
       .catch((error) => {
         console.error("Error:", error);
@@ -28,13 +28,11 @@ const Home = () => {
         <tbody>
           {messages.map((message) => {
             return (
-              <>
-                <tr key={message.id}>
-                  <td>{message.firstName}</td>
-                  <td>{message.title}</td>
-                  <td>{formatDate(message.createdAt)}</td>
-                </tr>
-              </>
+              <tr key={message.id}>
+                <td>{message.firstName}</td>
+                <td>{message.title}</td>
+                <td>{formatDate(message.createdAt)}</td>
+              </tr>
             );
           })}
         </tbody>

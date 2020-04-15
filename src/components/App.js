@@ -1,14 +1,35 @@
 import React from "react";
 import Home from "./Home";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import "./App.scss";
+import Button from "react-bootstrap/Button";
 
 function App() {
   return (
-    <>
-      <h5>Message Board: you have 0 new messages</h5>
-      <Home />
-    </>
+    <Router>
+      <Link to="/">
+        <Button variant="primary">
+          Message Board: you have 0 new messages
+        </Button>
+      </Link>
+      <Link to="/bla">
+        <Button variant="primary">Redirect test</Button>
+      </Link>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/bla">
+          <Redirect to="/" />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

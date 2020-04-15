@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js test
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add eslint-react-hooks-plugin
 
 PATH: 
   C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files\Amazon Corretto\jdk11.0.4_10\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Users\dbxrst0\AppData\Local\Microsoft\WindowsApps;C:\Users\dbxrst0\AppData\Roaming\npm;C:\Users\dbxrst0\AppData\Local\atom\bin;C:\Users\dbxrst0\AppData\Local\Yarn\bin;C:\Users\dbxrst0\AppData\Local\Programs\Microsoft VS Code\bin
@@ -14,12 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Projects\message-board\package.json: Unexpected token } in JSON at position 477
-      at JSON.parse (<anonymous>)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Program Files (x86)\Yarn\lib\cli.js:304:30)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:315:13
+  Error: https://registry.yarnpkg.com/eslint-react-hooks-plugin: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66036:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140586:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141558:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141480:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1183:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -35,10 +40,13 @@ npm manifest:
       "test": "jest"
     },
     "jest": {
-      "setupFilesAfterEnv": ["./jest.setup.js"],
+      "setupFilesAfterEnv": [
+        "./jest.setup.js"
+      ]
     },
     "dependencies": {
-      "@testing-library/jest-dom": "^5.4.0",
+      "@babel/plugin-transform-runtime": "^7.9.0",
+      "@babel/runtime": "^7.9.2",
       "bootstrap": "^4.4.1",
       "node-fetch": "^2.6.0",
       "react": "^16.13.1",
@@ -47,20 +55,17 @@ npm manifest:
     },
     "devDependencies": {
       "@babel/core": "^7.9.0",
-      "@babel/plugin-transform-runtime": "^7.9.0",
       "@babel/preset-env": "^7.9.0",
       "@babel/preset-react": "^7.9.4",
-      "@babel/runtime": "^7.9.2",
+      "@testing-library/jest-dom": "^5.4.0",
       "@testing-library/react": "^10.0.2",
       "babel-loader": "^8.1.0",
       "css-loader": "^3.5.0",
       "eslint": "^6.8.0",
       "eslint-plugin-react": "^7.19.0",
-      "fetch-mock": "^9.3.1",
       "html-loader": "^1.1.0",
       "html-webpack-plugin": "^4.0.4",
       "jest": "^25.2.7",
-      "jest-fetch-mock": "^3.0.3",
       "nock": "^12.0.3",
       "prettier": "2.0.3",
       "sass-loader": "^8.0.2",
@@ -2540,9 +2545,9 @@ Lockfile:
     integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
   
   core-js@^3.0.0:
-    version "3.6.4"
-    resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.4.tgz#440a83536b458114b9cb2ac1580ba377dc470647"
-    integrity sha512-4paDGScNgZP2IXXilaffL9X7968RuvwlkK3xWtZRVqgd8SYNiVKRJvkFd1aqqEuPfN7E68ZHEp9hDj6lHj4Hyw==
+    version "3.6.5"
+    resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+    integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
   
   core-util-is@1.0.2, core-util-is@~1.0.0:
     version "1.0.2"

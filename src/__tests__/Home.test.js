@@ -3,7 +3,6 @@ import { render, cleanup, screen } from "@testing-library/react";
 import Home from "../components/Home";
 import nock from "nock";
 import "@testing-library/jest-dom/extend-expect";
-// import fetch from "node-fetch";
 
 const messages = [
   {
@@ -38,8 +37,8 @@ describe("Home", () => {
 
   it("renders a list", async () => {
     render(<Home />);
-    await screen.findByText(/Saepe/);
 
-    expect(screen.getByText(/Saepe/)).toBeInTheDocument;
+    expect(await screen.findByText(/Saepe/)).toBeInTheDocument;
+    expect(await screen.findByText(/Incidunt/)).toBeInTheDocument;
   });
 });

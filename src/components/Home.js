@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { formatDate } from "../utils/utils";
-import { getData } from "../api/api";
+import { getMessagesList } from "./../api/api";
+import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { SHOW_LIST } from "./../store/actions";
 
-const Home = () => {
-  const [messages, setMessages] = useState([]);
+const Home = (props) => {
+  //   const [messages, setMessages] = useState([]);
   const limit = 50;
+  const messages = useSelector((state) => state.messages);
 
   useEffect(() => {
-    getData(limit)
+    getMessagesList(limit)
       .then((data) => setMessages(data))
       .catch((error) => {
         console.error("Error:", error);
@@ -41,4 +45,14 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state, ownProps) => {
+  return { messages: state.messages };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMessageList: () => dispatch({ type: actionTypes.SHOW_LIST }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

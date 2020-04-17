@@ -14,12 +14,10 @@ function App() {
   return (
     <Router>
       <Link to="/">
-        <Button variant="primary">
-          Message Board: you have 0 new messages
-        </Button>
+        <Button variant="dark">Message Board: you have 0 new messages</Button>
       </Link>
       <Link to="/bla">
-        <Button variant="primary">Redirect test</Button>
+        <Button variant="dark">Redirect test</Button>
       </Link>
       <Switch>
         <Route exact path="/">

@@ -8,7 +8,7 @@ import {
 
 const INITIAL_STATE = {
   isFetching: false,
-  error: "werkt nog niet",
+  error: "",
   messages: [],
   offset: 0,
   limit: 20,

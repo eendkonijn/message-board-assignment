@@ -35,7 +35,7 @@ export const fetchUsers = (limit, offset) => {
   return function (dispatch) {
     dispatch(fetchList(offset));
 
-    return fetch(API_URL_BAD)
+    return fetch(API_URL)
       .then((response) => response.json())
       .then(
         (json) => {

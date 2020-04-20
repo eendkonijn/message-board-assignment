@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import Alert from "react-bootstrap/Alert";
 import { formatDate } from "../utils/utils";
 import { connect, useSelector } from "react-redux";
 import { fetchUsers } from "./../store/actions";
@@ -11,7 +12,6 @@ const Home = (props) => {
   // I've left these in for my own reference. RvdS
   //   const [messages, setMessages] = useState([]);
   const limit = 50;
-  const OFFSET_VARIABLE = 50;
 
   useEffect(() => {
     // This code is left in for my own reference. RvdS
@@ -20,22 +20,47 @@ const Home = (props) => {
     //     .catch((error) => {
     //       console.error("Error:", error);
     //     });
-    props.dispatch(fetchUsers(props.offset));
-  }, []);
+    props.dispatch(fetchUsers(limit, props.offset));
+  }, [props.offset]);
 
   const loadNextPage = () => {
     props.dispatch({
       type: actionTypes.NEXT_PAGE,
-      newOffset: 50,
     });
+  };
 
-    setTimeout(() => {
-      props.dispatch(fetchUsers(props.offset));
-    }, 3000);
+  const loadPreviousPage = () => {
+    props.dispatch({
+      type: actionTypes.PREV_PAGE,
+    });
   };
 
   return (
     <>
+      <div className="buttons">
+        <span className="button">
+          <Button
+            variant="dark"
+            onClick={() => {
+              loadPreviousPage();
+            }}
+            disabled={props.offset === 0}
+          >
+            Vorige
+          </Button>
+        </span>
+        <span className="button">
+          <Button
+            variant="dark"
+            onClick={() => {
+              loadNextPage();
+            }}
+            disabled={props.messages.length < limit}
+          >
+            Volgende
+          </Button>
+        </span>
+      </div>
       <Table size="sm" striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -56,17 +81,9 @@ const Home = (props) => {
           })}
         </tbody>
       </Table>
-      <Button variant="dark">Vorige</Button>
-      <Button
-        variant="dark"
-        onClick={() => {
-          loadNextPage();
-        }}
-      >
-        Volgende
-      </Button>
+      {props.error && <Alert variant="danger">{props.error} </Alert>}
+
       {props.isFetching && <Spinner animation="border" variant="success" />}
-      <span>Hier moet een foutmelding komen: {props.error} </span>
     </>
   );
 };
@@ -80,6 +97,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+//for my own reference. RvdS
 // const mapDispatchToProps = (dispatch) => {
 //   return {
 //     dispatch,
@@ -91,4 +109,5 @@ const mapStateToProps = (state) => {
 //     // fetchUsers: () => dispatch(fetchUsers()),
 //   };
 // };
+
 export default connect(mapStateToProps)(Home);

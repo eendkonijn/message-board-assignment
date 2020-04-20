@@ -29,7 +29,6 @@ afterEach(cleanup);
 
 describe("Home", () => {
   beforeEach(() => {
-    // fetch.resetMocks();
     nock("http://localhost:3000")
       .get("/messages?limit=50")
       .reply(200, messages);

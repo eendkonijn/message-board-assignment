@@ -4,6 +4,7 @@ export const FETCH_LIST = "FETCH_LIST";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const NEXT_PAGE = "NEXT_PAGE";
+export const PREV_PAGE = "PREV_PAGE";
 
 const fetchList = (offset) => {
   return {
@@ -23,21 +24,27 @@ const fetchFail = (error) => {
   return {
     type: FETCH_FAIL,
     payload: error,
+    messages: [],
   };
 };
 
-export const fetchUsers = (offset) => {
-  console.log("in fetch-functie:" + offset);
-  const API_URL = "http://localhost:3000/messages?limit=50&offset=" + offset;
+export const fetchUsers = (limit, offset) => {
+  const API_URL =
+    "http://localhost:3000/messages" + "?limit=" + limit + "&offset=" + offset;
   const API_URL_BAD = "http://localhost:3000/errrrr";
   return function (dispatch) {
     dispatch(fetchList(offset));
 
-    return fetch(API_URL)
+    return fetch(API_URL_BAD)
+      .then((response) => response.json())
       .then(
-        (response) => response.json(),
-        (error) => dispatch(fetchFail(error))
-      )
-      .then((json) => dispatch(fetchSuccess(json)));
+        (json) => {
+          dispatch(fetchSuccess(json));
+        },
+        (err) => {
+          dispatch(fetchFail("Oeps er ging iets mis!")),
+            console.log("Fout: " + err);
+        }
+      );
   };
 };

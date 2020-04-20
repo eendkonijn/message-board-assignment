@@ -6,13 +6,9 @@ import "regenerator-runtime/runtime";
 import reducer from "./store/reducer";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
-// import { createLogger } from "redux-logger";
 import { Provider } from "react-redux";
 
-const store = createStore(
-  reducer /* preloadedState, */,
-  applyMiddleware(thunkMiddleware)
-);
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
   <React.StrictMode>

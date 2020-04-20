@@ -1,10 +1,17 @@
-import { FETCH_SUCCESS, FETCH_LIST, FETCH_FAIL, NEXT_PAGE } from "./actions";
+import {
+  FETCH_SUCCESS,
+  FETCH_LIST,
+  FETCH_FAIL,
+  NEXT_PAGE,
+  PREV_PAGE,
+} from "./actions";
 
 const INITIAL_STATE = {
   isFetching: false,
   error: "werkt nog niet",
   messages: [],
   offset: 0,
+  limit: 20,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -31,7 +38,12 @@ const reducer = (state = INITIAL_STATE, action) => {
     case NEXT_PAGE:
       return {
         ...state,
-        offset: action.newOffset,
+        offset: state.offset + 50,
+      };
+    case PREV_PAGE:
+      return {
+        ...state,
+        offset: state.offset - 50,
       };
   }
   return state;

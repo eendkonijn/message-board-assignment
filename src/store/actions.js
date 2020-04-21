@@ -27,6 +27,18 @@ const fetchFail = (error) => {
   };
 };
 
+export const nextPage = () => {
+  return {
+    type: NEXT_PAGE,
+  };
+};
+
+export const prevPage = () => {
+  return {
+    type: PREV_PAGE,
+  };
+};
+
 export const fetchUsers = (limit, offset) => {
   const API_URL = `http://localhost:3000/messages?limit=${limit}&offset=${offset}`;
   return function (dispatch) {

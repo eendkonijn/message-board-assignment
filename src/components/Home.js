@@ -5,7 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { formatDate } from "../utils/utils";
 import { connect, useSelector } from "react-redux";
-import { fetchUsers } from "./../store/actions";
+import { fetchUsers, prevPage, nextPage } from "./../store/actions";
 import * as actionTypes from "../store/actions";
 
 const Home = (props) => {
@@ -24,15 +24,11 @@ const Home = (props) => {
   }, [props.offset]);
 
   const loadNextPage = () => {
-    props.dispatch({
-      type: actionTypes.NEXT_PAGE,
-    });
+    props.nextPage();
   };
 
   const loadPreviousPage = () => {
-    props.dispatch({
-      type: actionTypes.PREV_PAGE,
-    });
+    props.prevPage();
   };
 
   return (
@@ -110,4 +106,6 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps, { fetchUsers })(Home);
+export default connect(mapStateToProps, { fetchUsers, prevPage, nextPage })(
+  Home
+);

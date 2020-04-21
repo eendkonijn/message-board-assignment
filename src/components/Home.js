@@ -5,13 +5,21 @@ import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { formatDate } from "../utils/utils";
 import { connect, useSelector } from "react-redux";
-import { fetchUsers, prevPage, nextPage } from "./../store/actions";
-import * as actionTypes from "../store/actions";
+import {
+  fetchMessageList,
+  prevPage,
+  nextPage,
+  fetchMessage,
+} from "./../store/actions";
+import DetailView from "./DetailView";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
   //   const [messages, setMessages] = useState([]);
   const limit = 50;
+  const [showing, setShowing] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
     // This code is left in for my own reference. RvdS
@@ -20,7 +28,7 @@ const Home = (props) => {
     //     .catch((error) => {
     //       console.error("Error:", error);
     //     });
-    props.fetchUsers(limit, props.offset);
+    props.fetchMessageList(limit, props.offset);
   }, [props.offset]);
 
   const loadNextPage = () => {
@@ -29,6 +37,13 @@ const Home = (props) => {
 
   const loadPreviousPage = () => {
     props.prevPage();
+  };
+
+  const renderMessage = (message) => {
+    props.fetchMessage(message.id);
+    setShowing(!showing);
+    setSelectedMessage(message);
+    console.log("render message clicked", message.id);
   };
 
   return (
@@ -57,6 +72,7 @@ const Home = (props) => {
           </Button>
         </span>
       </div>
+      {showing && <DetailView />}
       <Table size="sm" striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -65,20 +81,27 @@ const Home = (props) => {
             <th>Creation Date</th>
           </tr>
         </thead>
+
         <tbody>
           {props.messages.map((message) => {
             return (
-              <tr key={message.id}>
-                <td>{message.firstName}</td>
-                <td>{message.title}</td>
-                <td>{formatDate(message.createdAt)}</td>
-              </tr>
+              <>
+                <tr
+                  key={message.id}
+                  onClick={() => {
+                    renderMessage(message);
+                  }}
+                >
+                  <td>{message.firstName}</td>
+                  <td>{message.title}</td>
+                  <td>{formatDate(message.createdAt)}</td>
+                </tr>
+              </>
             );
           })}
         </tbody>
       </Table>
       {props.error && <Alert variant="danger">{props.error} </Alert>}
-
       {props.isFetching && <Spinner animation="border" variant="success" />}
     </>
   );
@@ -102,10 +125,13 @@ const mapStateToProps = (state) => {
 //     //     type: actionTypes.NEXT_PAGE,
 //     //     newOffset: 50,
 //     //   }),
-//     // fetchUsers: () => dispatch(fetchUsers()),
+//     // fetchMessageList: () => dispatch(fetchMessageList()),
 //   };
 // };
 
-export default connect(mapStateToProps, { fetchUsers, prevPage, nextPage })(
-  Home
-);
+export default connect(mapStateToProps, {
+  fetchMessageList,
+  prevPage,
+  nextPage,
+  fetchMessage,
+})(Home);

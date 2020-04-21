@@ -5,6 +5,9 @@ export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const NEXT_PAGE = "NEXT_PAGE";
 export const PREV_PAGE = "PREV_PAGE";
+export const FETCH_ONE_MESSAGE = "FETCH_ONE_MESSAGE";
+export const FETCH_ONE_MESSAGE_SUCCESS = "FETCH_ONE_MESSAGE_SUCCESS";
+export const FETCH_ONE_MESSAGE_FAIL = "FETCH_ONE_MESSAGE_FAIL";
 
 const fetchList = (offset) => {
   return {
@@ -39,7 +42,27 @@ export const prevPage = () => {
   };
 };
 
-export const fetchUsers = (limit, offset) => {
+export const fetchSingleMessage = () => {
+  return {
+    type: FETCH_ONE_MESSAGE,
+  };
+};
+
+export const singleMessageSuccess = (message) => {
+  return {
+    type: FETCH_ONE_MESSAGE_SUCCESS,
+    payload: message,
+  };
+};
+
+export const singleMessageFail = (error) => {
+  return {
+    type: FETCH_ONE_MESSAGE_FAIL,
+    payload: error,
+  };
+};
+
+export const fetchMessageList = (limit, offset) => {
   const API_URL = `http://localhost:3000/messages?limit=${limit}&offset=${offset}`;
   return function (dispatch) {
     dispatch(fetchList(offset));
@@ -52,6 +75,26 @@ export const fetchUsers = (limit, offset) => {
         },
         (err) => {
           dispatch(fetchFail("Oeps er ging iets mis!")),
+            console.log("Fout: " + err);
+        }
+      );
+  };
+};
+
+export const fetchMessage = (id) => {
+  const API_URL = `http://localhost:3000/messages/${id}`;
+
+  return function (dispatch) {
+    dispatch(fetchSingleMessage);
+
+    return fetch(API_URL)
+      .then((response) => response.json())
+      .then(
+        (json) => {
+          dispatch(singleMessageSuccess(json));
+        },
+        (err) => {
+          dispatch(singleMessageFail("Oeps er ging iets mis!")),
             console.log("Fout: " + err);
         }
       );

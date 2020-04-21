@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import "./App.scss";
+import DetailView from "./DetailView";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/detailview">
+          <DetailView />
         </Route>
         <Redirect to="/" />
       </Switch>

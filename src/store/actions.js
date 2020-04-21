@@ -24,14 +24,11 @@ const fetchFail = (error) => {
   return {
     type: FETCH_FAIL,
     payload: error,
-    messages: [],
   };
 };
 
 export const fetchUsers = (limit, offset) => {
-  const API_URL =
-    "http://localhost:3000/messages" + "?limit=" + limit + "&offset=" + offset;
-  const API_URL_BAD = "http://localhost:3000/errrrr";
+  const API_URL = `http://localhost:3000/messages?limit=${limit}&offset=${offset}`;
   return function (dispatch) {
     dispatch(fetchList(offset));
 

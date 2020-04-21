@@ -20,7 +20,7 @@ const Home = (props) => {
     //     .catch((error) => {
     //       console.error("Error:", error);
     //     });
-    props.dispatch(fetchUsers(limit, props.offset));
+    props.fetchUsers(limit, props.offset);
   }, [props.offset]);
 
   const loadNextPage = () => {
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { fetchUsers })(Home);

@@ -10,9 +10,9 @@ import {
   prevPage,
   nextPage,
   fetchMessage,
+  fetchComments,
 } from "./../store/actions";
 import DetailView from "./DetailView";
-import { Link } from "react-router-dom";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
@@ -41,9 +41,9 @@ const Home = (props) => {
 
   const renderMessage = (message) => {
     props.fetchMessage(message.id);
+    props.fetchComments(message.id);
     setShowing(!showing);
     setSelectedMessage(message);
-    console.log("render message clicked", message.id);
   };
 
   return (
@@ -109,10 +109,10 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages,
-    isFetching: state.isFetching,
-    error: state.error,
-    offset: state.offset,
+    messages: state.messagelist.messages,
+    isFetching: state.messagelist.isFetching,
+    error: state.messagelist.error,
+    offset: state.messagelist.offset,
   };
 };
 
@@ -134,4 +134,5 @@ export default connect(mapStateToProps, {
   prevPage,
   nextPage,
   fetchMessage,
+  fetchComments,
 })(Home);

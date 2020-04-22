@@ -7,6 +7,9 @@ import {
   FETCH_ONE_MESSAGE,
   FETCH_ONE_MESSAGE_FAIL,
   FETCH_ONE_MESSAGE_SUCCESS,
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_FAIL,
 } from "../actions";
 
 const INITIAL_STATE = {
@@ -16,6 +19,7 @@ const INITIAL_STATE = {
   offset: 0,
   limit: 20,
   message: [],
+  comments: [],
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -49,23 +53,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         offset: state.offset - 50,
       };
-    case FETCH_ONE_MESSAGE:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case FETCH_ONE_MESSAGE_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        message: action.payload,
-      };
-    case FETCH_ONE_MESSAGE_FAIL:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload,
-      };
+    default:
+      return state;
   }
   return state;
 };

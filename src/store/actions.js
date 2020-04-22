@@ -8,6 +8,9 @@ export const PREV_PAGE = "PREV_PAGE";
 export const FETCH_ONE_MESSAGE = "FETCH_ONE_MESSAGE";
 export const FETCH_ONE_MESSAGE_SUCCESS = "FETCH_ONE_MESSAGE_SUCCESS";
 export const FETCH_ONE_MESSAGE_FAIL = "FETCH_ONE_MESSAGE_FAIL";
+export const FETCH_COMMENTS = "FETCH_COMMENTS";
+export const FETCH_COMMENTS_SUCCESS = "FETCH_COMMENTS_SUCCESS";
+export const FETCH_COMMENTS_FAIL = "FETCH_COMMENTS_FAIL";
 
 const fetchList = (offset) => {
   return {
@@ -95,6 +98,46 @@ export const fetchMessage = (id) => {
         },
         (err) => {
           dispatch(singleMessageFail("Oeps er ging iets mis!")),
+            console.log("Fout: " + err);
+        }
+      );
+  };
+};
+
+export const fetchingComments = () => {
+  return {
+    type: FETCH_COMMENTS,
+  };
+};
+
+export const fetchCommentsSuccess = (comments) => {
+  return {
+    type: FETCH_COMMENTS_SUCCESS,
+    payload: comments,
+  };
+};
+
+export const fetchCommentsFail = (error) => {
+  return {
+    type: FETCH_COMMENTS_FAIL,
+    payload: error,
+  };
+};
+
+export const fetchComments = (id) => {
+  const API_URL = `http://localhost:3000/messages/${id}/comments`;
+
+  return function (dispatch) {
+    dispatch(fetchingComments);
+
+    return fetch(API_URL)
+      .then((response) => response.json())
+      .then(
+        (json) => {
+          dispatch(fetchCommentsSuccess(json));
+        },
+        (err) => {
+          dispatch(fetchCommentsFail("Oeps er ging iets mis!")),
             console.log("Fout: " + err);
         }
       );

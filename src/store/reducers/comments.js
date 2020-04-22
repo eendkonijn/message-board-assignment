@@ -5,7 +5,6 @@ import {
 } from "../actions";
 
 const INITIAL_STATE = {
-  isFetching: false,
   comments: [],
 };
 
@@ -28,8 +27,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         error: action.payload,
       };
-    default:
-      return state;
   }
   return state;
 };

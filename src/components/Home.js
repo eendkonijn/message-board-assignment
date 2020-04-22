@@ -13,13 +13,14 @@ import {
   fetchComments,
 } from "./../store/actions";
 import DetailView from "./DetailView";
+import "./Home.scss";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
   //   const [messages, setMessages] = useState([]);
   const limit = 50;
   const [showing, setShowing] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState(null);
+  //   const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
     // This code is left in for my own reference. RvdS
@@ -42,37 +43,29 @@ const Home = (props) => {
   const renderMessage = (message) => {
     props.fetchMessage(message.id);
     props.fetchComments(message.id);
-    setShowing(!showing);
-    setSelectedMessage(message);
+    setShowing(true);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    // setSelectedMessage(message);
+  };
+
+  const closeDetailView = () => {
+    setShowing(false);
   };
 
   return (
     <>
-      <div className="buttons">
-        <span className="button">
-          <Button
-            variant="dark"
-            onClick={() => {
-              loadPreviousPage();
-            }}
-            disabled={props.offset === 0}
-          >
-            Vorige
-          </Button>
-        </span>
-        <span className="button">
-          <Button
-            variant="dark"
-            onClick={() => {
-              loadNextPage();
-            }}
-            disabled={props.messages.length < limit}
-          >
-            Volgende
-          </Button>
-        </span>
-      </div>
       {showing && <DetailView />}
+      {showing && (
+        <div
+          className="closeMessageBar"
+          onClick={() => {
+            closeDetailView();
+          }}
+        >
+          CLOSE
+        </div>
+      )}
       <Table size="sm" striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -103,6 +96,30 @@ const Home = (props) => {
       </Table>
       {props.error && <Alert variant="danger">{props.error} </Alert>}
       {props.isFetching && <Spinner animation="border" variant="success" />}
+      <div className="buttons">
+        <span className="button">
+          <Button
+            variant="dark"
+            onClick={() => {
+              loadPreviousPage();
+            }}
+            disabled={props.offset === 0}
+          >
+            Vorige
+          </Button>
+        </span>
+        <span className="button">
+          <Button
+            variant="dark"
+            onClick={() => {
+              loadNextPage();
+            }}
+            disabled={props.messages.length < limit}
+          >
+            Volgende
+          </Button>
+        </span>
+      </div>
     </>
   );
 };
@@ -113,6 +130,7 @@ const mapStateToProps = (state) => {
     isFetching: state.messagelist.isFetching,
     error: state.messagelist.error,
     offset: state.messagelist.offset,
+    comments: state.comments.comments,
   };
 };
 

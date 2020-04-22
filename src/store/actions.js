@@ -85,20 +85,24 @@ export const fetchMessageList = (limit, offset) => {
 };
 
 export const fetchMessage = (id) => {
-  const API_URL = `http://localhost:3000/messages/${id}`;
+  const API_URL = `http://localhost:3000/messages/2000`;
 
   return function (dispatch) {
     dispatch(fetchSingleMessage);
 
     return fetch(API_URL)
+      .then((response) => {
+        if (response.status === 404) {
+          dispatch(singleMessageFail("not found")), console.log("not found");
+        }
+      })
       .then((response) => response.json())
       .then(
         (json) => {
           dispatch(singleMessageSuccess(json));
         },
         (err) => {
-          dispatch(singleMessageFail("Oeps er ging iets mis!")),
-            console.log("Fout: " + err);
+          dispatch(singleMessageFail("not found")), console.log("Fout: " + err);
         }
       );
   };

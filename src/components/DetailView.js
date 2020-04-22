@@ -1,23 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Image from "react-bootstrap/Image";
 import "./DetailView.scss";
 import { formatDate } from "./../utils/utils";
-
-const Comments = (props) => {
-  return (
-    <div>
-      {/* {props.comments.map((comment) => {
-        console.log(comment);
-      })} */}
-    </div>
-  );
-};
+import Comments from "./Comments";
 
 const DetailView = (props) => {
+  useEffect(() => {
+    console.log(props.comments);
+  });
+
   return (
     <>
-      <div className="container">
+      <div className="messageContainer">
         <Image
           src={props.message.avatar}
           roundedCircle
@@ -25,18 +20,20 @@ const DetailView = (props) => {
           height="150px"
         />
         <div className="nameEmail">
-          <div className="text">
-            {props.message.firstName} {props.message.lastName} <br />
-            {props.message.email}
-          </div>
+          <span className="name">
+            {props.message.firstName} {props.message.lastName}
+          </span>
+          <br />
+          <span className="email"> {props.message.email}</span>
         </div>
-        <div className="title">Title: {props.message.title}</div>
-        <div className="body">Body: {props.message.body}</div>
+        <div className="title">{props.message.title}</div>
+        <div className="body">{props.message.body}</div>
         <div className="createdAt">
           Created at: {formatDate(props.message.createdAt)}
         </div>
       </div>
-      <Comments />
+
+      <Comments passedcomments={props.comments} />
     </>
   );
 };

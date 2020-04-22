@@ -13,12 +13,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/detailview">
-          <DetailView />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/details" component={DetailView} />
         <Redirect to="/" />
       </Switch>
     </Router>

@@ -1,0 +1,39 @@
+.commentContainer {
+  border: 1px solid #dee2e6;
+  font-family: "Segoe UI";
+  background-color: #343a40;
+  color: white;
+  //   grid-template-rows: 3fr 0.5fr 2fr 0.5fr;
+}
+
+.commentContainer > div {
+  padding: 10px;
+}
+
+.commentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.commentHeader {
+  grid-column: 1/3;
+  font-weight: bold;
+  border: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+  font-size: larger;
+}
+
+.commentNameEmail {
+  grid-column: 1/3;
+}
+
+.commentBody {
+  grid-column: 1/3;
+  padding: 15px 0;
+}
+
+.commentCreatedAt {
+  grid-column: 1/3;
+  font-style: italic;
+  font-size: smaller;
+}

@@ -55,6 +55,7 @@ DetailView.propTypes = {
   body: PropTypes.string,
   title: PropTypes.string,
   comments: PropTypes.array,
+  error: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(DetailView);

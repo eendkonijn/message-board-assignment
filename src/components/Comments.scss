@@ -1,21 +1,20 @@
-.commentContainer {
+.comments {
   border: 1px solid #dee2e6;
   font-family: "Segoe UI";
   background-color: #343a40;
   color: white;
-  //   grid-template-rows: 3fr 0.5fr 2fr 0.5fr;
 }
 
-.commentContainer > div {
+.comments > div {
   padding: 10px;
 }
 
-.commentGrid {
+.comments__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.commentHeader {
+.comments__header {
   grid-column: 1/3;
   font-weight: bold;
   border: 1px solid #dee2e6;
@@ -23,16 +22,16 @@
   font-size: larger;
 }
 
-.commentNameEmail {
+.comments__nameEmail {
   grid-column: 1/3;
 }
 
-.commentBody {
+.comments__body {
   grid-column: 1/3;
   padding: 15px 0;
 }
 
-.commentCreatedAt {
+.comments__createdAt {
   grid-column: 1/3;
   font-style: italic;
   font-size: smaller;

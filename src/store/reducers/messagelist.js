@@ -4,12 +4,6 @@ import {
   FETCH_FAIL,
   NEXT_PAGE,
   PREV_PAGE,
-  FETCH_ONE_MESSAGE,
-  FETCH_ONE_MESSAGE_FAIL,
-  FETCH_ONE_MESSAGE_SUCCESS,
-  FETCH_COMMENTS,
-  FETCH_COMMENTS_SUCCESS,
-  FETCH_COMMENTS_FAIL,
 } from "../actions";
 
 const INITIAL_STATE = {
@@ -56,7 +50,6 @@ const reducer = (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-  return state;
 };
 
 export default reducer;

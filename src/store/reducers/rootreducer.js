@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import messagelist from "./messagelist";
-import singlepost from "./singlepost";
+import message from "./message";
 import comments from "./comments";
 
 export default combineReducers({
   messagelist: messagelist,
-  singlepost: singlepost,
+  message: message,
   comments: comments,
 });

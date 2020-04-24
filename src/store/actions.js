@@ -97,7 +97,7 @@ export const fetchMessage = (id) => {
           dispatch(singleMessageSuccess(json));
         },
         (err) => {
-          dispatch(singleMessageFail("not found")), console.log("Fout: " + err);
+          dispatch(singleMessageFail("Not Found")), console.log(err);
         }
       );
   };

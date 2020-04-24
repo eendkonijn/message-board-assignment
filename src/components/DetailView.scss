@@ -1,5 +1,5 @@
 //grid container styles
-.messageContainer {
+.detail-view {
   border: 1px solid #dee2e6;
   font-family: "Segoe UI";
   background-color: #343a40;
@@ -9,45 +9,41 @@
   grid-template-rows: 3fr 0.5fr 2fr 0.5fr;
 }
 
-.messageContainer > div {
+.detail-view > div {
   padding: 10px;
 }
 
 //styles for message grid
-.nameEmail {
+.detail-view__name-email {
   grid-column: 2/3;
   padding-top: 50px;
   margin: auto 0;
 }
 
-.text {
-  font-weight: bold;
-}
-
-.image {
+.detail-view__image {
   grid-column: 1/2;
   padding: 10px;
 }
 
-.title {
+.detail-view__title {
   grid-column: 1/3;
   font-weight: bold;
 }
 
-.body {
+.detail-view__body {
   grid-column: 1/3;
   font-size: larger;
 }
 
-.createdAt {
+.detail-view__createdAt {
   grid-column: 1/3;
   font-size: smaller;
 }
 
-.name {
+.detail-view__name {
   font-weight: bold;
 }
 
-.email {
+.detail-view__email {
   font-size: smaller;
 }

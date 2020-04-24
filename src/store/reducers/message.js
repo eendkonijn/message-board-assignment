@@ -5,7 +5,9 @@ import {
 } from "../actions";
 
 const INITIAL_STATE = {
-  message: [],
+  message: {},
+  error: "",
+  fetchingMessage: false,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -13,18 +15,18 @@ const reducer = (state = INITIAL_STATE, action) => {
     case FETCH_ONE_MESSAGE:
       return {
         ...state,
-        isFetching: true,
+        fetchingMessage: true,
       };
     case FETCH_ONE_MESSAGE_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        fetchingMessage: false,
         message: action.payload,
       };
     case FETCH_ONE_MESSAGE_FAIL:
       return {
         ...state,
-        isFetching: false,
+        fetchingMessage: false,
         error: action.payload,
       };
   }

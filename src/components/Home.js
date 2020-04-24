@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { formatDate } from "../utils/utils";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
   fetchMessageList,
   prevPage,
@@ -14,13 +14,13 @@ import {
 } from "./../store/actions";
 import DetailView from "./DetailView";
 import "./Home.scss";
+import { PropTypes } from "prop-types";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
   //   const [messages, setMessages] = useState([]);
   const limit = 50;
   const [showing, setShowing] = useState(false);
-  //   const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
     // This code is left in for my own reference. RvdS
@@ -29,7 +29,8 @@ const Home = (props) => {
     //     .catch((error) => {
     //       console.error("Error:", error);
     //     });
-    props.fetchMessageList(limit, props.offset);
+    const { fetchMessageList } = props;
+    fetchMessageList(limit, props.offset);
   }, [props.offset]);
 
   const loadNextPage = () => {
@@ -46,7 +47,6 @@ const Home = (props) => {
     setShowing(true);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    // setSelectedMessage(message);
   };
 
   const closeDetailView = () => {
@@ -57,12 +57,7 @@ const Home = (props) => {
     <>
       {showing && <DetailView />}
       {showing && (
-        <div
-          className="closeMessageBar"
-          onClick={() => {
-            closeDetailView();
-          }}
-        >
+        <div className="closeMessageBar" onClick={closeDetailView}>
           CLOSE
         </div>
       )}
@@ -76,18 +71,19 @@ const Home = (props) => {
         </thead>
 
         <tbody>
-          {props.messages.map((message) => {
+          {props.messages.map((message, i) => {
             return (
               <>
                 <tr
+                  className="home__table-row"
                   key={message.id}
                   onClick={() => {
                     renderMessage(message);
                   }}
                 >
-                  <td>{message.firstName}</td>
-                  <td>{message.title}</td>
-                  <td>{formatDate(message.createdAt)}</td>
+                  <td key={i}>{message.firstName}</td>
+                  <td key={i + 1}>{message.title}</td>
+                  <td key={i + 2}>{formatDate(message.createdAt)}</td>
                 </tr>
               </>
             );
@@ -132,6 +128,19 @@ const mapStateToProps = (state) => {
     offset: state.messagelist.offset,
     comments: state.comments.comments,
   };
+};
+
+Home.propTypes = {
+  messages: PropTypes.array,
+  isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  offset: PropTypes.number.isRequired,
+  comments: PropTypes.array,
+  fetchMessageList: PropTypes.func,
+  prevPage: PropTypes.func,
+  nextPage: PropTypes.func,
+  fetchMessage: PropTypes.func,
+  fetchComments: PropTypes.func,
 };
 
 //for my own reference. RvdS

@@ -5,4 +5,13 @@
   text-align: center;
   border: 1px solid #dee2e6;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.closeMessageBar:hover {
+  background-color: #b9bbbe;
+}
+
+.home__table-row {
+  cursor: pointer;
 }

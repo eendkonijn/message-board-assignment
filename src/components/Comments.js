@@ -11,21 +11,19 @@ const Comments = (props) => {
       </div>
       {props.comments.map((comment, i) => {
         return (
-          <>
-            <div className="comments__grid" key={i}>
-              <div className="comments__nameEmail">
-                <span className="name">
-                  {comment.firstName} {comment.lastName}
-                </span>
-                <br />
-                <span className="email">{comment.email}</span>
-              </div>
-              <div className="comments__body"> {comment.body}</div>
-              <div className="comments__createdAt">
-                Created at: {formatDate(comment.createdAt)}
-              </div>
+          <div className="comments__grid" key={i}>
+            <div className="comments__nameEmail">
+              <span className="name">
+                {comment.firstName} {comment.lastName}
+              </span>
+              <br />
+              <span className="email">{comment.email}</span>
             </div>
-          </>
+            <div className="comments__body"> {comment.body}</div>
+            <div className="comments__createdAt">
+              Created at: {formatDate(comment.createdAt)}
+            </div>
+          </div>
         );
       })}
     </div>

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import DetailView from "./DetailView";
+import CreatePost from "./CreatePost";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/details" component={DetailView} />
+        <Route path="/create" component={CreatePost} />
         <Redirect to="/" />
       </Switch>
     </Router>

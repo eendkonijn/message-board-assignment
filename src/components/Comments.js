@@ -32,7 +32,6 @@ const Comments = (props) => {
 
 Comments.propTypes = {
   comments: PropTypes.array,
-  error: PropTypes.string,
 };
 
 export default Comments;

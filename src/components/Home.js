@@ -15,14 +15,12 @@ import {
 import DetailView from "./DetailView";
 import "./Home.scss";
 import { PropTypes } from "prop-types";
-import { Link } from "react-router-dom";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
   //   const [messages, setMessages] = useState([]);
-  const limit = 20;
+  const limit = 50;
   const [showing, setShowing] = useState(false);
-  const { fetchMessageList, offset } = props;
 
   useEffect(() => {
     // This code is left in for my own reference. RvdS
@@ -31,8 +29,9 @@ const Home = (props) => {
     //     .catch((error) => {
     //       console.error("Error:", error);
     //     });
-    fetchMessageList(limit, offset);
-  }, [fetchMessageList, limit, offset]);
+    const { fetchMessageList } = props;
+    fetchMessageList(limit, props.offset);
+  }, [props.offset]);
 
   const loadNextPage = () => {
     props.nextPage();
@@ -74,17 +73,19 @@ const Home = (props) => {
         <tbody>
           {props.messages.map((message, i) => {
             return (
-              <tr
-                className="home__table-row"
-                key={message.id}
-                onClick={() => {
-                  renderMessage(message);
-                }}
-              >
-                <td key={i}>{message.firstName}</td>
-                <td key={i + 1}>{message.title}</td>
-                <td key={i + 2}>{formatDate(message.createdAt)}</td>
-              </tr>
+              <>
+                <tr
+                  className="home__table-row"
+                  key={message.id}
+                  onClick={() => {
+                    renderMessage(message);
+                  }}
+                >
+                  <td key={i}>{message.firstName}</td>
+                  <td key={i + 1}>{message.title}</td>
+                  <td key={i + 2}>{formatDate(message.createdAt)}</td>
+                </tr>
+              </>
             );
           })}
         </tbody>
@@ -114,9 +115,6 @@ const Home = (props) => {
             Volgende
           </Button>
         </span>
-        <Link className="button" to="/create">
-          <Button variant="dark">Maak Bericht</Button>
-        </Link>
       </div>
     </>
   );

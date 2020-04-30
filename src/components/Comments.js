@@ -19,7 +19,7 @@ const Comments = (props) => {
               <br />
               <span>{comment.email}</span>
             </div>
-          </>
+          </div>
         );
       })}
     </div>
@@ -27,12 +27,8 @@ const Comments = (props) => {
 };
 
 Comments.propTypes = {
-<<<<<<< HEAD
-  comments: PropTypes.array,
-=======
   comments: PropTypes.array.isRequired,
   error: PropTypes.string,
->>>>>>> CreatePost
 };
 
 export default Comments;

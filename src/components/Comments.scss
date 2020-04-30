@@ -1,8 +1,10 @@
+@use 'App';
+
 .comments {
   border: 1px solid #dee2e6;
   font-family: "Segoe UI";
-  background-color: #343a40;
-  color: white;
+  background-color: App.$background-primary;
+  color: App.$text-color;
 }
 
 .comments > div {

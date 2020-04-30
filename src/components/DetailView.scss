@@ -1,9 +1,10 @@
-//grid container styles
+@use 'App';
+
 .detail-view {
   border: 1px solid #dee2e6;
   font-family: "Segoe UI";
-  background-color: #343a40;
-  color: white;
+  background-color: App.$background-primary;
+  color: App.$text-color;
   display: grid;
   grid-template-columns: 1fr 12fr;
   grid-template-rows: 3fr 0.5fr 2fr 0.5fr;

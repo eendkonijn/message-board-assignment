@@ -8,13 +8,15 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import DetailView from "./DetailView";
+import CreatePost from "./CreatePost";
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/details" component={DetailView} />
+        <Route path="/create" component={CreatePost} />
+        <Route path="/:id" component={DetailView} />
         <Redirect to="/" />
       </Switch>
     </Router>

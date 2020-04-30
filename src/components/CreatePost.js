@@ -10,7 +10,10 @@ const CreatePost = () => {
   const { register, handleSubmit, errors } = useForm();
   const [fetching, setFetching] = useState(false);
   const [fetched, setFetched] = useState(false);
-  const newMessage = {};
+  const [fetchedId, setFetchedId] = useState();
+  const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,9})+$/;
+
+  useEffect(() => {});
 
   const onSubmit = async (data) => {
     setFetching(true);
@@ -27,27 +30,22 @@ const CreatePost = () => {
       const response = await fetch("http://localhost:3000/messages", settings);
       const data = await response.json();
       if (response.ok) {
-        setFetching(false);
+        setFetchedId(data.id);
         setFetched(true);
-        newMessage = data;
       }
+
       return data;
     } catch (e) {
       console.log(e.message);
       setFetched(false);
-      setFetching(false);
       return e;
+    } finally {
+      setFetching(false);
     }
   };
 
-  useEffect(() => {
-    //cleanup function?
-  });
-
   if (fetched) {
-    return (
-      <Redirect to={{ pathname: "/details", state: { message: newMessage } }} />
-    );
+    return <Redirect to={{ pathname: `${fetchedId}` }} />;
   }
   return (
     <>
@@ -62,6 +60,7 @@ const CreatePost = () => {
                 placeholder="Vul je voornaam in"
                 ref={register({ required: true, minLength: 2 })}
                 disabled={fetching}
+                autoFocus
               />
               {errors.firstName && errors.firstName.type === "minLength" && (
                 <p className="create-post__errormessage">
@@ -100,7 +99,7 @@ const CreatePost = () => {
                 placeholder="Vul je e-mailadres in"
                 ref={register({
                   required: true,
-                  pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,9})+$/,
+                  pattern: EMAIL_REGEX,
                 })}
                 disabled={fetching}
               />

@@ -1,13 +1,15 @@
+@use 'App';
+
 .create-post {
-  background-color: #343a40;
+  background-color: App.$background-primary;
 }
 
 .create-post__form {
   margin: auto;
   max-width: 50%;
   padding: 2rem;
-  background-color: #343a40;
-  color: white;
+  background-color: App.$background-primary;
+  color: App.$text-color;
   font-family: "Segoe UI";
   min-width: 300px;
 }

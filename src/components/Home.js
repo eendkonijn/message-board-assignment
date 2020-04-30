@@ -81,9 +81,9 @@ const Home = (props) => {
                   renderMessage(message);
                 }}
               >
-                <td key={i}>{message.firstName}</td>
-                <td key={i + 1}>{message.title}</td>
-                <td key={i + 2}>{formatDate(message.createdAt)}</td>
+                <td>{message.firstName}</td>
+                <td>{message.title}</td>
+                <td>{formatDate(message.createdAt)}</td>
               </tr>
             );
           })}
@@ -133,16 +133,16 @@ const mapStateToProps = (state) => {
 };
 
 Home.propTypes = {
-  messages: PropTypes.array,
+  messages: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string,
   offset: PropTypes.number.isRequired,
-  comments: PropTypes.array,
-  fetchMessageList: PropTypes.func,
-  prevPage: PropTypes.func,
-  nextPage: PropTypes.func,
-  fetchMessage: PropTypes.func,
-  fetchComments: PropTypes.func,
+  comments: PropTypes.array.isRequired,
+  fetchMessageList: PropTypes.func.isRequired,
+  prevPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
+  fetchMessage: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
 };
 
 //for my own reference. RvdS

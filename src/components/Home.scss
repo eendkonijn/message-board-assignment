@@ -1,6 +1,8 @@
+@use 'App';
+
 .closeMessageBar {
-  background-color: #343a40;
-  color: white;
+  background-color: App.$background-primary;
+  color: App.$text-color;
   padding: 20px;
   text-align: center;
   border: 1px solid #dee2e6;

@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Image from "react-bootstrap/Image";
 import "./DetailView.scss";
 import { formatDate } from "./../utils/utils";
 import Comments from "./Comments";
 import { PropTypes } from "prop-types";
+import { fetchMessage, fetchComments } from "./../store/actions";
+import { useParams } from "react-router-dom";
 
 const DetailView = (props) => {
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      console.log("at useEFfect: id");
+      fetchMessage(id);
+      fetchComments(id);
+    }
+  });
+
   return (
     <>
       <div className="detail-view">
@@ -47,15 +59,19 @@ const mapStateToProps = (state) => {
 };
 
 DetailView.propTypes = {
-  message: PropTypes.object,
-  avatar: PropTypes.string,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  createdAt: PropTypes.instanceOf(Date),
-  body: PropTypes.string,
-  title: PropTypes.string,
-  comments: PropTypes.array,
-  error: PropTypes.string,
+  message: PropTypes.shape({
+    avatar: PropTypes.string,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired,
+    error: PropTypes.string,
+  }),
+  comments: PropTypes.array.isRequired,
 };
 
-export default connect(mapStateToProps)(DetailView);
+export default connect(mapStateToProps, { fetchMessage, fetchComments })(
+  DetailView
+);

@@ -13,11 +13,11 @@ const Comments = (props) => {
         return (
           <div className="comments__grid" key={i}>
             <div className="comments__nameEmail">
-              <span className="name">
+              <span>
                 {comment.firstName} {comment.lastName}
               </span>
               <br />
-              <span className="email">{comment.email}</span>
+              <span>{comment.email}</span>
             </div>
             <div className="comments__body"> {comment.body}</div>
             <div className="comments__createdAt">
@@ -31,7 +31,7 @@ const Comments = (props) => {
 };
 
 Comments.propTypes = {
-  comments: PropTypes.array,
+  comments: PropTypes.array.isRequired,
   error: PropTypes.string,
 };
 

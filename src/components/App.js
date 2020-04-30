@@ -15,8 +15,8 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/details" component={DetailView} />
         <Route path="/create" component={CreatePost} />
+        <Route path="/:id" component={DetailView} />
         <Redirect to="/" />
       </Switch>
     </Router>

@@ -13,9 +13,17 @@ const DetailView = (props) => {
 
   useEffect(() => {
     if (id) {
-      console.log("at useEFfect: id");
-      fetchMessage(id);
-      fetchComments(id);
+      console.log("id:", id);
+      const API_URL = `http://localhost:3000/messages/${id}`;
+      fetch(API_URL)
+        .then((response) => response.json())
+        .then(
+          (response) =>
+            console.log(response.id) ||
+            fetchMessage(response.id) ||
+            fetchComments(response.id)
+        )
+        .catch((error) => console.log(("error: ", error)));
     }
   });
 

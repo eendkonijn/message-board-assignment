@@ -15,6 +15,7 @@ import {
 import DetailView from "./DetailView";
 import "./Home.scss";
 import { PropTypes } from "prop-types";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   // I've left these in for my own reference. RvdS
@@ -113,6 +114,9 @@ const Home = (props) => {
             Volgende
           </Button>
         </span>
+        <Link className="button" to="/create">
+          <Button variant="dark">Maak Bericht</Button>
+        </Link>
       </div>
     </>
   );

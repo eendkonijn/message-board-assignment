@@ -1,35 +1,31 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import "./DetailView.scss";
 import { formatDate } from "./../utils/utils";
 import Comments from "./Comments";
 import { PropTypes } from "prop-types";
 import { fetchMessage, fetchComments } from "./../store/actions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 const DetailView = (props) => {
   const { id } = useParams();
 
   useEffect(() => {
     if (id) {
-      console.log("id:", id);
-      const API_URL = `http://localhost:3000/messages/${id}`;
-      fetch(API_URL)
-        .then((response) => response.json())
-        .then(
-          (response) =>
-            console.log(response.id) ||
-            fetchMessage(response.id) ||
-            fetchComments(response.id)
-        )
-        .catch((error) => console.log(("error: ", error)));
+      props.fetchMessage(id);
+      props.fetchComments(id);
     }
   });
 
   return (
     <>
       <div className="detail-view">
+        {props.fetchingMessage && (
+          <Spinner animation="border" variant="success" />
+        )}
         <Image
           src={props.message.avatar}
           roundedCircle
@@ -54,6 +50,13 @@ const DetailView = (props) => {
       </div>
 
       <Comments comments={props.comments} error={props.error} />
+      {id && (
+        <Link to="/">
+          <Button variant="dark" className="button">
+            Naar lijst
+          </Button>
+        </Link>
+      )}
     </>
   );
 };
@@ -61,6 +64,7 @@ const DetailView = (props) => {
 const mapStateToProps = (state) => {
   return {
     message: state.message.message,
+    isFetching: state.message.fetchingMessage,
     comments: state.comments.comments,
     error: state.message.error,
   };
